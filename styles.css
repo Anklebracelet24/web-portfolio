@@ -1,0 +1,638 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --black-color: hsl(220, 24%, 12%);
+  --black-color-light: hsl(220, 24%, 15%);
+  --black-color-lighten: hsl(220, 20%, 18%);
+  --white-color: #fff;
+  --body-color: hsl(220, 100%, 97%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Montserrat", sans-serif;
+  --normal-font-size: 0.938rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1024px) {
+  :root {
+    --normal-font-size: 1rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+}
+
+ul {
+  list-style: none;
+  /* Color highlighting when pressed on mobile devices */
+  /*-webkit-tap-highlight-color: transparent;*/
+}
+
+a {
+  text-decoration: none;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1120px;
+  margin-inline: 1.5rem;
+}
+
+/*=============== HEADER ===============*/
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--black-color);
+  box-shadow: 0 2px 16px hsla(220, 32%, 8%, 0.3);
+  z-index: var(--z-fixed);
+}
+
+/*=============== NAV ===============*/
+.nav {
+  height: var(--header-height);
+}
+
+.nav__logo,
+.nav__burger,
+.nav__close {
+  color: var(--white-color);
+}
+
+.nav__logo:hover {
+  color: #1282a2;
+}
+
+.nav__data {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.25rem;
+  font-weight: var(--font-semi-bold);
+  /* Color highlighting when pressed on mobile devices */
+  /*-webkit-tap-highlight-color: transparent;*/
+}
+
+.nav__logo i {
+  font-weight: initial;
+  font-size: 1.25rem;
+}
+
+.nav__toggle {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+.nav__burger,
+.nav__close {
+  position: absolute;
+  width: max-content;
+  height: max-content;
+  inset: 0;
+  margin: auto;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: opacity 0.1s, transform 0.4s;
+}
+
+.nav__close {
+  opacity: 0;
+}
+
+/* Navigation for mobile devices */
+@media screen and (max-width: 1118px) {
+  .nav__menu {
+    position: absolute;
+    left: 0;
+    top: 2.5rem;
+    width: 100%;
+    height: calc(100vh - 3.5rem);
+    overflow: auto;
+    pointer-events: none;
+    opacity: 0;
+    transition: top 0.4s, opacity 0.3s;
+  }
+  .nav__menu::-webkit-scrollbar {
+    width: 0;
+  }
+  .nav__list {
+    background-color: var(--black-color);
+    padding-top: 1rem;
+  }
+}
+
+.nav__link {
+  color: var(--white-color);
+  background-color: var(--black-color);
+  font-weight: var(--font-semi-bold);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+
+.nav__link:hover {
+  background-color: var(--black-color-light);
+  color: #1282a2;
+}
+
+/* Show menu */
+.show-menu {
+  opacity: 1;
+  top: 3.5rem;
+  pointer-events: initial;
+}
+
+/* Show icon */
+.show-icon .nav__burger {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+.show-icon .nav__close {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 340px) {
+  .container {
+    margin-inline: 1rem;
+  }
+
+  .nav__link {
+    padding-inline: 1rem;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1118px) {
+  .container {
+    margin-inline: auto;
+  }
+
+  .nav {
+    height: calc(var(--header-height) + 2rem);
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav__toggle {
+    display: none;
+  }
+  .nav__list {
+    height: 100%;
+    display: flex;
+    column-gap: 3rem;
+  }
+  .nav__link {
+    height: 100%;
+    padding: 0;
+    justify-content: initial;
+    column-gap: 0.25rem;
+  }
+  .nav__link:hover {
+    background-color: transparent;
+  }
+}
+
+#landing {
+  margin-top: 5rem;
+}
+
+/* Row container */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center align horizontally */
+  align-items: center; /* Center align vertically */
+  background-color: #6c757d; /* Equivalent to Bootstrap's bg-secondary */
+  padding: 2rem; /* Equivalent to py-4 */
+}
+
+@media (min-width: 992px) {
+  .row {
+    padding: 3rem; /* Equivalent to py-lg-5 */
+  }
+}
+
+/* Column for image */
+.img-container {
+  flex: 0 0 83.333%; /* col-10 (10/12 of the container width) */
+  max-width: 83.333%;
+  padding: 1.5rem; /* Equivalent to p-3 */
+}
+
+@media (min-width: 768px) {
+  .img-container {
+    flex: 0 0 25%; /* col-md-3 */
+    max-width: 25%;
+  }
+}
+
+/* Image styling */
+.rounded-circle {
+  border-radius: 50%; /* Makes the image circular */
+  border: 1px solid #343a40; /* Equivalent to border-dark */
+  width: 100%;
+  height: auto; /* Ensures responsiveness */
+}
+
+/* Column for text content */
+.text-content {
+  flex: 0 0 100%; /* Full width on small screens */
+  max-width: 100%;
+  color: #fff; /* Equivalent to text-white */
+  padding-left: 0;
+  padding-top: 2rem; /* Equivalent to py-lg-5 */
+}
+
+@media (min-width: 768px) {
+  .text-content {
+    flex: 0 0 58.333%; /* col-md-7 */
+    max-width: 58.333%;
+    padding-left: 2rem; /* Equivalent to pl-md-5 */
+  }
+}
+
+@media (min-width: 992px) {
+  .text-content {
+    flex: 0 0 41.666%; /* col-lg-5 */
+    max-width: 41.666%;
+  }
+}
+
+/* Typography */
+.heading {
+  margin-top: 0.5rem; /* Equivalent to mt-2 */
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .heading {
+    text-align: left; /* text-md-left */
+  }
+}
+
+.subheading {
+  margin: 1.5rem 0; /* Equivalent to my-3 */
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .subheading {
+    text-align: left; /* text-md-left */
+  }
+}
+
+.description {
+  text-align: justify;
+}
+
+.my-projects {
+  margin-top: 3rem; /* equivalent to mt-5 in Bootstrap */
+  margin-bottom: 0.25rem; /* equivalent to mb-1 in Bootstrap */
+  text-align: center; /* equivalent to text-center in Bootstrap */
+}
+/* Container for the projects */
+
+/* Container for the projects */
+.projects {
+  display: flex;
+  justify-content: center;
+  gap: 1rem; /* Space between the cards */
+  flex-wrap: wrap;
+  padding: 2rem;
+}
+
+/* Card style */
+.card {
+  width: 300px; /* Fixed width for cards */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden; /* Ensure the image doesn't overflow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: white;
+  transition: transform 0.3s ease; /* Smooth hover effect */
+  margin-bottom: 1.5rem;
+}
+
+.card:hover {
+  transform: translateY(-10px); /* Lift card on hover */
+}
+
+/* Image styles */
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+}
+
+/* Card body */
+.card-body {
+  padding: 1rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  font-size: 0.875rem;
+  color: #555;
+}
+
+.card-text small {
+  color: #999;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .card {
+    width: 100%; /* Cards will take full width on smaller screens */
+  }
+
+  .projects {
+    padding: 1rem; /* Reduce padding on mobile */
+  }
+
+  .card-img-top {
+    height: 150px; /* Adjust height for mobile */
+  }
+}
+
+/* General Styles */
+.tools {
+  background-color: #6c757d; /* Background color for the jumbotron */
+  padding: 2rem;
+  text-align: center;
+}
+
+.tools-title {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+/* Tools Container */
+.tools-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding-top: 1rem;
+}
+
+/* Each tools section (Front End, MERN, Other Tools) */
+.tools-section {
+  padding: 1.5rem;
+  width: 250px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* Tools Row (image grid within each section) */
+.tools-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two images per row */
+  gap: 1rem;
+}
+
+.tool {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tool Image */
+.tool-image {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .tools-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tools-section {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .tools-row {
+    grid-template-columns: 1fr; /* Stack images vertically on small screens */
+  }
+}
+
+.contact-title {
+  text-align: center; /* Align text to the center */
+  margin-top: 3rem; /* Equivalent to my-5 (top margin) */
+  margin-bottom: 3rem; /* Equivalent to my-5 (bottom margin) */
+}
+
+/* Container for social icons */
+.social-icons {
+  display: flex;
+  justify-content: center; /* Center the icons horizontally */
+
+  margin-bottom: 3rem; /* Equivalent to mb-5 (bottom margin) */
+}
+
+/* Each individual icon */
+.social-icon {
+  flex: 1; /* This allows the icons to resize on different screen sizes */
+  display: flex;
+  justify-content: center; /* Center the icon inside the column */
+  align-items: center;
+}
+
+/* Style for the links */
+.icon {
+  color: #000; /* Set color to dark (text-dark equivalent) */
+  font-size: 2rem; /* Size for the icons, you can adjust as needed */
+  text-decoration: none; /* Remove the underline from the links */
+}
+
+/* Hover effect on the icon links */
+.icon:hover {
+  color: #007bff; /* Change color on hover (blue effect) */
+}
+
+/* Media Query for responsiveness */
+@media (max-width: 768px) {
+  .social-icons {
+    flex-direction: column; /* Stack the icons vertically on small screens */
+    align-items: center; /* Center the icons */
+  }
+  .social-icon {
+    margin-bottom: 1rem; /* Space between icons when stacked */
+  }
+}
+
+/* Container for the row */
+.container {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Styling for columns */
+.col-md-6 {
+  flex: 1;
+  min-width: 300px;
+  margin: 2rem 0;
+}
+
+/* Title for the sections */
+h4 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Styling for the iframe */
+iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+}
+
+/* Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Form group to space out form elements */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+/* Form controls (input, textarea) */
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Button styling */
+.btn {
+  background-color: transparent;
+  border: 1px solid #007bff;
+  color: #007bff;
+  padding: 0.75rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .col-md-6 {
+    width: 100%;
+  }
+}
+
+/* Footer Styling */
+.footer {
+  background-color: #343a40; /* Dark background */
+  color: #f8f9fa; /* Light text color */
+  padding: 1.5rem 0; /* Padding for the footer */
+  text-align: center; /* Center-align the text */
+  margin-top: 5rem; /* Add space on top */
+}
+
+/* Title Styling */
+.footer-title {
+  font-size: 1.25rem; /* Font size for the title */
+  margin-bottom: 0.5rem; /* Space below the title */
+}
+
+/* Subtitle Styling */
+.footer-subtitle {
+  font-size: 1rem; /* Font size for the subtitle */
+  margin-bottom: 0.25rem; /* Space below the subtitle */
+}
+
+/* Rights Text Styling */
+.footer-rights {
+  font-size: 0.875rem; /* Font size for the rights text */
+  margin-top: 0.25rem; /* Space above the rights text */
+}
+
+/* Enable smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optional: Styling for the anchor links */
+.scroll-link {
+  text-decoration: none;
+  color: #007bff; /* Set color for the link */
+  font-weight: bold;
+  padding: 10px;
+}
+
+.scroll-link:hover {
+  color: #0056b3; /* Darker color on hover */
+}
